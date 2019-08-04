@@ -18,6 +18,7 @@ void World::Initialize(int screenWidth, int screenHeight)
 {
 	System::GetInstance().InitializeWindows();
 	InitGDI(System::GetInstance().GetHwnd());
+	srand((unsigned)time(nullptr));
 	ZeroMemory(currentKeys, sizeof(currentKeys));
 	ZeroMemory(lastKeys, sizeof(lastKeys));
 	startClock = lastClock = currentClock = clock();
@@ -54,14 +55,22 @@ void World::Render()
 		v.y -= 1;
 	}
 
+	if (GetKeyState(VK_SPACE) == 1) {
+		v1 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
+		v2 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
+		v3 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
+	}
+
 	v1 += v * deltaTime * 100.0f;
 	v2 += v * deltaTime * 100.0f;
 	v3 += v * deltaTime * 100.0f;
 
-	DrawTriangle(v1, v2, v3);
+	DrawTriangle2(v1, v2, v3);
 	
 
 	BufferSwap();
+
+	cout << deltaTime << endl;
 }
 
 void World::Update()

@@ -13,6 +13,7 @@ struct Vector2
 	Vector2(const Vector2& other) : x(other.x), y(other.y) {}
 	Vector2(const Vector2Int& other);
 	Vector2(const Vector3& other);
+	Vector2(const Vector3Int& other);
 	Vector2(const Vector4& other);
 	~Vector2() {}
 
@@ -79,7 +80,9 @@ struct Vector2Int
 	Vector2Int(const float& x, const float& y) : x(x), y(y) {}
 	Vector2Int(const Vector2Int& other) : x(other.x), y(other.y) {}
 	Vector2Int(const Vector2& other);
+	Vector2Int(const Vector3& other);
 	Vector2Int(const Vector3Int& other);
+	Vector2Int(const Vector4& other);
 	~Vector2Int() {}
 
 	Vector2Int& operator+=(const Vector2Int& rhs) {
@@ -144,8 +147,9 @@ struct Vector3
 	Vector3(const float& x, const float& y) : x(x), y(y), z(0.0f) {}
 	Vector3(const float& x, const float& y, const float& z) : x(x), y(y), z(z) {}
 	Vector3(const Vector3& other) : x(other.x), y(other.y), z(other.z) {}
-	Vector3(const Vector3Int& other);
 	Vector3(const Vector2& other);
+	Vector3(const Vector2Int& other);
+	Vector3(const Vector3Int& other);
 	Vector3(const Vector4& other);
 	~Vector3() {}
 
@@ -219,8 +223,10 @@ struct Vector3Int
 	Vector3Int(const float& x, const float& y) : x(x), y(y), z(0) {}
 	Vector3Int(const float& x, const float& y, const float& z) : x(x), y(y), z(z) {}
 	Vector3Int(const Vector3Int& other) : x(other.x), y(other.y), z(other.z) {}
-	Vector3Int(const Vector3& other);
+	Vector3Int(const Vector2& other);
 	Vector3Int(const Vector2Int& other);
+	Vector3Int(const Vector3& other);
+	Vector3Int(const Vector4& other);
 	~Vector3Int() {}
 
 	Vector3Int& operator+=(const Vector3Int& rhs) {
@@ -291,7 +297,10 @@ struct Vector4
 	Vector4(const float& x, const float& y, const float& z) : x(x), y(y), z(z), w(0.0f) {}
 	Vector4(const float& x, const float& y, const float& z, const float& w) : x(x), y(y), z(z), w(w) {}
 	Vector4(const Vector4& other) : x(other.x), y(other.y), z(other.z), w(other.w) {}
+	Vector4(const Vector2& other);
+	Vector4(const Vector2Int& other);
 	Vector4(const Vector3& other);
+	Vector4(const Vector3Int& other);
 	~Vector4() {}
 
 	Vector4& operator+=(const Vector4& rhs) {

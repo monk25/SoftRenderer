@@ -11,3 +11,4 @@ void PutPixel(int x, int y);
 void DrawLine(const Vector3& start, const Vector3& dir, const int& length);
 void DrawLine(const Vector3& p1, const Vector3& p2);
 void DrawTriangle(const Vector3& p1, const Vector3& p2, const Vector3& p3);
+void DrawTriangle2(Vector3Int p1, Vector3Int p2, Vector3Int p3);

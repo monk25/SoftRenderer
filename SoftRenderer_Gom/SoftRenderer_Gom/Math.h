@@ -27,3 +27,8 @@ inline const T const Abs(const T &t)
 {
 	return (t > 0) ? t : t * -1;
 }
+
+inline int Random(const int& from, const int& to)
+{
+	return rand() % (to - from + 1) + from;
+}
