@@ -1,6 +1,5 @@
-
-#include "stdafx.h"
-#include "SoftRenderer.h"
+#include "pch.h"
+#include "Define.h"
 #include "GDIHelper.h"
 
 // º¯¼ö
@@ -14,7 +13,7 @@ HBITMAP hDefaultBitmap, hDIBitmap;
 
 void BufferSwap()
 {
-	BitBlt(hScreenDC, 0, 0, g_nClientWidth, g_nClientHeight, hMemoryDC, 0, 0, SRCCOPY);
+	BitBlt(hScreenDC, 0, 0, ScreenWidth, ScreenHeight, hMemoryDC, 0, 0, SRCCOPY);
 }
 
 void SetColor(BYTE r, BYTE g, BYTE b)
@@ -25,7 +24,7 @@ void SetColor(BYTE r, BYTE g, BYTE b)
 void Clear()
 {
 	ULONG* dest = (ULONG*)g_pBits;
-	DWORD bytecount = g_nClientWidth * g_nClientHeight * sizeof(ULONG);
+	DWORD bytecount = ScreenWidth * ScreenHeight * sizeof(ULONG);
 	ULONG value = g_CurrentColor;
 	bytecount /= 4;
 	while (bytecount--)
@@ -43,8 +42,8 @@ void InitGDI(HWND hWnd)
 	BITMAPINFO bmi;
 	memset(&bmi, 0, sizeof(BITMAPINFO));
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-	bmi.bmiHeader.biWidth = g_nClientWidth;
-	bmi.bmiHeader.biHeight = -g_nClientHeight;
+	bmi.bmiHeader.biWidth = ScreenWidth;
+	bmi.bmiHeader.biHeight = -ScreenHeight;
 	bmi.bmiHeader.biPlanes = 1;
 	bmi.bmiHeader.biBitCount = 32;
 	bmi.bmiHeader.biCompression = BI_RGB;
@@ -52,12 +51,12 @@ void InitGDI(HWND hWnd)
 	hDIBitmap = CreateDIBSection(hMemoryDC, &bmi, DIB_RGB_COLORS, (void**)&g_pBits, NULL, 0);
 	hDefaultBitmap = (HBITMAP)SelectObject(hMemoryDC, hDIBitmap);
 
-	g_bIsActive = TRUE;
+	//g_bIsActive = TRUE;
 }
 
 void ReleaseGDI(HWND hWnd)
 {
-	g_bIsActive = FALSE;
+	//g_bIsActive = FALSE;
 
 	DeleteObject(hDefaultBitmap);
 	DeleteObject(hDIBitmap);
