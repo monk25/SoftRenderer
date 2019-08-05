@@ -4,6 +4,8 @@
 #include "GDIHelper.h"
 #include "Renderer.h"
 
+#include "Shape.h"
+
 
 World::World()
 {
@@ -37,36 +39,11 @@ void World::Render()
 	//Entity Render()
 	SetColor(255, 0, 0);
 
-	static Vector2 v1{ -50.0f, -50.0f };
-	static Vector2 v2{ 0.0f, 50.0f };
-	static Vector2 v3{ 50.0f, -50.0f };
+	//static Triangle t;
+	//t.Render();
 
-	Vector2 v;
-	if (GetKeyState(VK_LEFT) > 0) {
-		v.x -= 1;
-	}
-	if (GetKeyState(VK_RIGHT) > 0) {
-		v.x += 1;
-	}
-	if (GetKeyState(VK_UP) > 0) {
-		v.y += 1;
-	}
-	if (GetKeyState(VK_DOWN) > 0) {
-		v.y -= 1;
-	}
-
-	if (GetKeyState(VK_SPACE) == 1) {
-		v1 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
-		v2 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
-		v3 = Vector2Int{ Random(-400, 400), Random(-400, 400) };
-	}
-
-	v1 += v * deltaTime * 100.0f;
-	v2 += v * deltaTime * 100.0f;
-	v3 += v * deltaTime * 100.0f;
-
-	DrawTriangle2(v1, v2, v3);
-	
+	static Quad q;
+	q.Render();
 
 	BufferSwap();
 

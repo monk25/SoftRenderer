@@ -31,6 +31,9 @@
     <Filter Include="Framework\GDIHelper\Renderer">
       <UniqueIdentifier>{62f5c6ff-c38e-4889-afab-b85f3ea912f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\GDIHelper\Shape">
+      <UniqueIdentifier>{c82390a1-0ec4-44f6-9158-3c7cc565f1a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -60,6 +63,7 @@
     <ClInclude Include="Renderer.h">
       <Filter>Framework\GDIHelper\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Shape.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -83,5 +87,6 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Framework\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp" />
   </ItemGroup>
 </Project>

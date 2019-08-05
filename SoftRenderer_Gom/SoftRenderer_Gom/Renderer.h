@@ -1,14 +1,48 @@
 #pragma once
-
 #include "Define.h"
-
-inline bool IsInRange(int x, int y)
-{
-	return (abs(x) < (ScreenWidth / 2)) && (abs(y) < (ScreenHeight / 2));
-}
+#include "Singleton.h"
 
 void PutPixel(int x, int y);
+void PutPixel(int x, int y, const Vector3& color);
 void DrawLine(const Vector3& start, const Vector3& dir, const int& length);
 void DrawLine(const Vector3& p1, const Vector3& p2);
-void DrawTriangle(const Vector3& p1, const Vector3& p2, const Vector3& p3);
-void DrawTriangle2(Vector3Int p1, Vector3Int p2, Vector3Int p3);
+
+struct Vertex {
+	Vertex() : pos(), color(), uv() {}
+	Vertex(Vector3Int pos) : pos(pos) {}
+	Vertex(Vector3Int pos, Vector3Int color) : pos(pos), color(color) {}
+	Vertex(Vector3Int pos, Vector3Int color, Vector2 uv) : 
+		pos(pos), color(color), uv(uv) {}
+	~Vertex() {}
+
+	Vector3Int pos;
+	Vector3Int color;
+	Vector2 uv;
+};
+
+class Renderer
+{
+public:
+	Renderer() {}
+	virtual ~Renderer() {}
+
+protected:
+	virtual void PutPixel(Vertex v) = 0;
+
+private:
+
+public:
+	void DrawTriangle(Vertex v1, Vertex v2, Vertex v3);
+	void Render(Vertex vertices[], int indices[], int iSize);
+};
+
+class ColorRenderer :
+	public Renderer, public Singleton<ColorRenderer>
+{
+public:
+	ColorRenderer() {}
+	virtual ~ColorRenderer() {}
+
+protected:
+	virtual void PutPixel(Vertex v) override;
+};
