@@ -112,5 +112,5 @@ void BitmapRenderer::PutPixel(Vertex v)
 
 	ULONG* dest = (ULONG*)GetGDI().pBits;
 	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
-	*(dest + offset) = GetAsset().GetPixel(v.uv.x, v.uv.y, (Bitmap*)data);
+	*(dest + offset) = GetAsset().GetPixel(v.uv.x * ((Bitmap*)data)->width, v.uv.y * ((Bitmap*)data)->height, (Bitmap*)data);
 }
