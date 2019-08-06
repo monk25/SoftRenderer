@@ -143,7 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Asset.h" />
     <ClInclude Include="Define.h" />
+    <ClCompile Include="Asset.cpp" />
     <ClCompile Include="GDIHelper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="GDIHelper.h" />

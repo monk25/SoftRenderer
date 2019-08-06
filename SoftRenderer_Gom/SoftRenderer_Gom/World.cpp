@@ -2,6 +2,7 @@
 #include "World.h"
 #include "System.h"
 #include "GDIHelper.h"
+#include "Asset.h"
 #include "Renderer.h"
 
 #include "Shape.h"
@@ -19,7 +20,8 @@ World::~World()
 void World::Initialize(int screenWidth, int screenHeight)
 {
 	System::GetInstance().InitializeWindows();
-	InitGDI(System::GetInstance().GetHwnd());
+	GDIHelper::GetInstance().InitGDI(System::GetInstance().GetHwnd());
+	Asset::GetInstance().Initialize();
 	srand((unsigned)time(nullptr));
 	ZeroMemory(currentKeys, sizeof(currentKeys));
 	ZeroMemory(lastKeys, sizeof(lastKeys));
@@ -28,24 +30,17 @@ void World::Initialize(int screenWidth, int screenHeight)
 
 void World::Dispose()
 {
-	ReleaseGDI(System::GetInstance().GetHwnd());
+	Asset::GetInstance().Dispose();
+	GDIHelper::GetInstance().ReleaseGDI(System::GetInstance().GetHwnd());
 }
 
 void World::Render()
 {
-	SetColor(0, 0, 0);
-	Clear();
-
-	//Entity Render()
-	SetColor(255, 0, 0);
-
-	//static Triangle t;
-	//t.Render();
+	static Triangle t;
+	t.Render();
 
 	static Quad q;
 	q.Render();
-
-	BufferSwap();
 
 	cout << deltaTime << endl;
 }

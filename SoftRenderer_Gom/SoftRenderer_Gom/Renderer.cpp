@@ -1,22 +1,23 @@
 #include "pch.h"
-#include "GDIHelper.h"
 #include "Renderer.h"
+#include "GDIHelper.h"
+#include "Asset.h"
 
 
 void PutPixel(int x, int y)
 {
 	if (!IsInRange(x, y)) return;
 
-	ULONG* dest = (ULONG*)g_pBits;
+	ULONG* dest = (ULONG*)GetGDI().pBits;
 	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + x + ScreenWidth * -y;
-	*(dest + offset) = g_CurrentColor;
+	*(dest + offset) = GetGDI().currentColor;
 }
 
 void PutPixel(int x, int y, const Vector3 & color)
 {
 	if (!IsInRange(x, y)) return;
 
-	ULONG* dest = (ULONG*)g_pBits;
+	ULONG* dest = (ULONG*)GetGDI().pBits;
 	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + x + ScreenWidth * -y;
 	*(dest + offset) = RGB(color.z, color.y, color.x);
 }
@@ -37,8 +38,9 @@ void DrawLine(const Vector3& p1, const Vector3& p2)
 	DrawLine(p1, dir, length);
 }
 
-void Renderer::Render(Vertex vertices[], int indices[], int iSize)
+void Renderer::Render(Vertex vertices[], int indices[], int iSize, void* data)
 {
+	this->data = data;
 	for (int i = 0; i < iSize; i += 3) {
 		DrawTriangle(vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]]);
 	}
@@ -99,7 +101,16 @@ void ColorRenderer::PutPixel(Vertex v)
 {
 	if (!IsInRange(v.pos.x, v.pos.y)) return;
 
-	ULONG* dest = (ULONG*)g_pBits;
+	ULONG* dest = (ULONG*)GetGDI().pBits;
 	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
 	*(dest + offset) = RGB(v.color.z, v.color.y, v.color.x);
+}
+
+void BitmapRenderer::PutPixel(Vertex v)
+{
+	if (!IsInRange(v.pos.x, v.pos.y)) return;
+
+	ULONG* dest = (ULONG*)GetGDI().pBits;
+	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
+	*(dest + offset) = GetAsset().GetPixel(v.uv.x, v.uv.y, (Bitmap*)data);
 }

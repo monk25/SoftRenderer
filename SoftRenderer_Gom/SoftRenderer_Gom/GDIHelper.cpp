@@ -2,30 +2,29 @@
 #include "Define.h"
 #include "GDIHelper.h"
 
-// 변수
-ULONG g_CurrentColor;
-BYTE *g_pBits;
+GDIHelper::GDIHelper()
+{
+}
 
-HDC	hScreenDC, hMemoryDC;
-HBITMAP hDefaultBitmap, hDIBitmap;
+GDIHelper::~GDIHelper()
+{
+}
 
-// 함수
-
-void BufferSwap()
+void GDIHelper::BufferSwap()
 {
 	BitBlt(hScreenDC, 0, 0, ScreenWidth, ScreenHeight, hMemoryDC, 0, 0, SRCCOPY);
 }
 
-void SetColor(BYTE r, BYTE g, BYTE b)
+void GDIHelper::SetColor(BYTE r, BYTE g, BYTE b)
 {
-	g_CurrentColor = RGB(b, g, r);
+	currentColor = RGB(b, g, r);
 }
 
-void Clear()
+void GDIHelper::Clear()
 {
-	ULONG* dest = (ULONG*)g_pBits;
+	ULONG* dest = (ULONG*)pBits;
 	DWORD bytecount = ScreenWidth * ScreenHeight * sizeof(ULONG);
-	ULONG value = g_CurrentColor;
+	ULONG value = currentColor;
 	bytecount /= 4;
 	while (bytecount--)
 	{
@@ -34,7 +33,7 @@ void Clear()
 	return;
 }
 
-void InitGDI(HWND hWnd)
+void GDIHelper::InitGDI(HWND hWnd)
 {
 	hScreenDC = GetDC(hWnd);
 	hMemoryDC = CreateCompatibleDC(hScreenDC);
@@ -48,13 +47,13 @@ void InitGDI(HWND hWnd)
 	bmi.bmiHeader.biBitCount = 32;
 	bmi.bmiHeader.biCompression = BI_RGB;
 
-	hDIBitmap = CreateDIBSection(hMemoryDC, &bmi, DIB_RGB_COLORS, (void**)&g_pBits, NULL, 0);
+	hDIBitmap = CreateDIBSection(hMemoryDC, &bmi, DIB_RGB_COLORS, (void**)&pBits, NULL, 0);
 	hDefaultBitmap = (HBITMAP)SelectObject(hMemoryDC, hDIBitmap);
 
 	//g_bIsActive = TRUE;
 }
 
-void ReleaseGDI(HWND hWnd)
+void GDIHelper::ReleaseGDI(HWND hWnd)
 {
 	//g_bIsActive = FALSE;
 
@@ -63,5 +62,3 @@ void ReleaseGDI(HWND hWnd)
 	ReleaseDC(hWnd, hScreenDC);
 	ReleaseDC(hWnd, hMemoryDC);
 }
-
-

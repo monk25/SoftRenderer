@@ -34,6 +34,9 @@
     <Filter Include="Framework\GDIHelper\Shape">
       <UniqueIdentifier>{c82390a1-0ec4-44f6-9158-3c7cc565f1a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Asset">
+      <UniqueIdentifier>{8f6ff928-6b4f-4330-857e-f29b71078324}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -64,6 +67,7 @@
       <Filter>Framework\GDIHelper\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Asset.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -88,5 +92,6 @@
       <Filter>Framework\Math</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Asset.cpp" />
   </ItemGroup>
 </Project>

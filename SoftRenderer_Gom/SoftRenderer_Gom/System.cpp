@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "System.h"
 #include "World.h"
+#include "GDIHelper.h"
 
 
 System::System() : screenWidth(0), screenHeight(0)
@@ -47,7 +48,12 @@ void System::Run()
 bool System::Frame()
 {
 	World::GetInstance().Update();
+
+	GDIHelper::GetInstance().SetColor(0, 0, 0);
+	GDIHelper::GetInstance().Clear();
 	World::GetInstance().Render();
+	GDIHelper::GetInstance().BufferSwap();
+
 	return true;
 }
 

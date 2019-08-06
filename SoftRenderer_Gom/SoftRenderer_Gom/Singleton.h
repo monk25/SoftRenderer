@@ -8,7 +8,7 @@ protected:
 	virtual ~Singleton() {}
 
 public:
-	static T& GetInstance()
+	inline static T& GetInstance()
 	{
 		static T instance;
 		return instance;

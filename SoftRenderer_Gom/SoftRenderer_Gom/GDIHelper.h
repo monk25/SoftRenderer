@@ -1,16 +1,29 @@
 #pragma once
 #include "Define.h"
+#include "Singleton.h"
 
-extern ULONG g_CurrentColor;
-extern BYTE *g_pBits;
-
-void InitGDI(HWND hWnd);
-void ReleaseGDI(HWND hWnd);
-void SetColor(BYTE r, BYTE g, BYTE b);
-void Clear();
-void BufferSwap();
-
-inline bool IsInRange(int x, int y)
+class GDIHelper :
+	public Singleton<GDIHelper>
 {
-	return (Abs(x) < (ScreenWidth / 2)) && (Abs(y) < (ScreenHeight / 2));
+public:
+	GDIHelper();
+	~GDIHelper();
+
+	void InitGDI(HWND hWnd);
+	void ReleaseGDI(HWND hWnd);
+	void SetColor(BYTE r, BYTE g, BYTE b);
+	void Clear();
+	void BufferSwap();
+
+public:
+	ULONG currentColor;
+	BYTE* pBits;
+
+private:
+	HDC hScreenDC, hMemoryDC;
+	HBITMAP hDefaultBitmap, hDIBitmap;
+};
+
+inline GDIHelper& GetGDI() {
+	return GDIHelper::GetInstance();
 }
