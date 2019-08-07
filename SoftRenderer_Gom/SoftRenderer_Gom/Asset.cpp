@@ -66,7 +66,7 @@ Bitmap* Asset::OpenBMP(string filename)
 			int DestIndex = j * bmpih.biWidth + i;
 
 			BYTE *CurrentColor = (BYTE *)(pImageBuf + DestIndex);
-			pImageBuf[DestIndex] = RGB(RValue, GValue, BValue);
+			pImageBuf[DestIndex] = RGB(BValue, GValue, RValue);
 		}
 	}
 

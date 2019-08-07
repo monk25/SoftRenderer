@@ -40,7 +40,7 @@ void World::Render()
 	//t.Render();
 
 	static Quad q;
-	q.Render(GetAsset().GetBMP("ikmyung.bmp"));
+	q.Render(GetAsset().GetBMP("ikmyung2.bmp"));
 
 	cout << deltaTime << endl;
 }
