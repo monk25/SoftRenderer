@@ -13,13 +13,13 @@ void DrawLine(const Vector3& p1, const Vector3& p2);
 
 struct Vertex {
 	Vertex() : pos(), color(), uv() {}
-	Vertex(Vector3Int pos) : pos(pos) {}
-	Vertex(Vector3Int pos, Vector3Int color) : pos(pos), color(color) {}
-	Vertex(Vector3Int pos, Vector3Int color, Vector2 uv) : 
+	Vertex(Vector3 pos) : pos(pos) {}
+	Vertex(Vector3 pos, Vector3Int color) : pos(pos), color(color) {}
+	Vertex(Vector3 pos, Vector3Int color, Vector2 uv) : 
 		pos(pos), color(color), uv(uv) {}
 	~Vertex() {}
 
-	Vector3Int pos;
+	Vector3 pos;
 	Vector3Int color;
 	Vector2 uv;
 };

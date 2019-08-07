@@ -37,10 +37,10 @@ void World::Dispose()
 void World::Render()
 {
 	static Triangle t;
-	t.Render();
+	//t.Render();
 
 	static Quad q;
-	q.Render();
+	q.Render(GetAsset().GetBMP("ikmyung.bmp"));
 
 	cout << deltaTime << endl;
 }

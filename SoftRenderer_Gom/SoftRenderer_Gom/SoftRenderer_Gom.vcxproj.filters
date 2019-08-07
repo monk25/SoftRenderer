@@ -66,8 +66,12 @@
     <ClInclude Include="Renderer.h">
       <Filter>Framework\GDIHelper\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Asset.h" />
+    <ClInclude Include="Asset.h">
+      <Filter>Framework\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Framework\GDIHelper\Shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -91,7 +95,11 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Framework\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="Asset.cpp">
+      <Filter>Framework\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Framework\GDIHelper\Shape</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -62,6 +62,9 @@ void Renderer::DrawTriangle(Vertex v1, Vertex v2, Vertex v3)
 	Vector3 d2 = v3.pos - v1.pos;
 	Vector3 d3 = v3.pos - v2.pos;
 
+	Vector3 u = d1;
+	Vector3 v = d2;
+
 	int d1Len = Abs(d1.y);
 	int d2Len = Abs(d2.y);
 	int d3Len = Abs(d3.y);
@@ -73,25 +76,37 @@ void Renderer::DrawTriangle(Vertex v1, Vertex v2, Vertex v3)
 	if (d3Len != 0)
 		d3 /= d3Len;
 
+	float div = 1 / (Dot(u, u) * Dot(v, v) - Dot(u, v) * Dot(v, u));
+
 	for (int i = 0; i < d1Len; i++) {
-		Vector3Int u{ v1.pos + d1 * i };
-		Vector3Int v{ v1.pos + d2 * i };
-		if (u.x > v.x) {
-			Swap(u.x, v.x);
+		Vector3Int start{ v1.pos + d1 * i };
+		Vector3Int end{ v1.pos + d2 * i };
+		if (start.x > end.x) {
+			Swap(start.x, end.x);
 		}
-		for (int j = u.x; j <= v.x; j++) {
-			Vertex pixel{ Vector2Int(j, u.y), Vector3Int(255, 0, 0), Vector2(0, 0) };
+		for (int j = start.x; j <= end.x; j++) {
+			Vector3 w = Vector2Int(j, start.y) - v1.pos;
+			float s = (Dot(w, u) * Dot(v, v) - Dot(w, v) * Dot(v, u)) * div;
+			float t = (Dot(w, v) * Dot(u, u) - Dot(w, u) * Dot(u, v)) * div;
+			Vertex pixel{ Vector2Int(j, start.y), 
+				(1 - s - t) * v1.color + s * v2.color + t * v3.color, 
+				(1 - s - t) * v1.uv + s * v2.uv + t * v3.uv };
 			PutPixel(pixel);
 		}
 	}
 	for (int i = 0; i <= d3Len; i++) {
-		Vector3Int u{ v1.pos + d1 * d1Len + d3 * i };
-		Vector3Int v{ v1.pos + d2 * (d1Len + i) };
-		if (u.x > v.x) {
-			Swap(u.x, v.x);
+		Vector3Int start{ v1.pos + d1 * Max(d1Len, 1) + d3 * i };
+		Vector3Int end{ v1.pos + d2 * (d1Len + i) };
+		if (start.x > end.x) {
+			Swap(start.x, end.x);
 		}
-		for (int j = u.x; j <= v.x; j++) {
-			Vertex pixel{ Vector2Int(j, u.y), Vector3Int(0, 255, 0), Vector2(0, 0) };
+		for (int j = start.x; j <= end.x; j++) {
+			Vector3 w = Vector2Int(j, start.y) - v1.pos;
+			float s = (Dot(w, u) * Dot(v, v) - Dot(w, v) * Dot(v, u)) * div;
+			float t = (Dot(w, v) * Dot(u, u) - Dot(w, u) * Dot(u, v)) * div;
+			Vertex pixel{ Vector2Int(j, start.y), 
+				(1 - s - t) * v1.color + s * v2.color + t * v3.color,
+				(1 - s - t) * v1.uv + s * v2.uv + t * v3.uv };
 			PutPixel(pixel);
 		}
 	}

@@ -10,7 +10,11 @@ void Shape::SetRenderer(Renderer* renderer)
 Triangle::Triangle()
 {
 	Initialize();
-	SetTriangle(Vector3{ -50.0f, -50.0f }, Vector3{ 0.0f, 50.0f }, Vector3{ 50.0f, -50.0f });
+	SetTriangle(
+		Vertex{ Vector3{ -50.0f, -50.0f }, Vector3Int{ 255, 0, 0}, Vector2{0, 1} },
+		Vertex{ Vector3{ 0.0f, 50.0f }, Vector3Int{ 0, 255, 0}, Vector2{0.5, 0} },
+		Vertex{ Vector3{ 50.0f, -50.0f }, Vector3Int{ 0, 0, 255}, Vector2{1, 1} });
+	SetRenderer(&BitmapRenderer::GetInstance());
 }
 
 Triangle::Triangle(const Vector3& p1, const Vector3& p2, const Vector3& p3)
@@ -51,7 +55,13 @@ void Triangle::Initialize()
 Quad::Quad()
 {
 	Initialize();
-	SetQuad(-50, 50, 50, -50);
+	SetQuad(
+		Vertex{ Vector3{-500,  500}, Vector3Int{255, 0, 0}, Vector2{0, 0} },
+		Vertex{ Vector3{ 500,  500}, Vector3Int{0, 255, 0}, Vector2{1, 0} },
+		Vertex{ Vector3{-500, -500}, Vector3Int{0, 0, 255}, Vector2{0, 1} },
+		Vertex{ Vector3{ 500, -500}, Vector3Int{255, 255, 255}, Vector2{1, 1} }
+	);
+	SetRenderer(&BitmapRenderer::GetInstance());
 }
 
 Quad::Quad(const int& left, const int& top, const int& right, const int& bottom)

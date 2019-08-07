@@ -32,3 +32,12 @@ inline int Random(const int& from, const int& to)
 {
 	return rand() % (to - from + 1) + from;
 }
+
+inline float Dot(const Vector3& v1, const Vector3& v2) {
+	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+}
+
+inline float Clamp(float& value, const float& min, const float& max)
+{
+	return Max(Min(value, max), min);
+}
