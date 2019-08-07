@@ -72,6 +72,9 @@
     <ClInclude Include="Shape.h">
       <Filter>Framework\GDIHelper\Shape</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Framework\GDIHelper\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Framework\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
