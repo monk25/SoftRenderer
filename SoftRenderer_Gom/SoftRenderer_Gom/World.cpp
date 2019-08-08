@@ -39,13 +39,13 @@ void World::Render()
 	//static Triangle t;
 	//t.Render(GetAsset().GetBMP("ikmyung2.bmp"));
 	
-	//static Quad q;
-	//q.Render(GetAsset().GetBMP("ikmyung2.bmp"));
+	static Quad q;
+	q.Render(GetAsset().GetBMP("ikmyung2.bmp"));
 
-	Matrix2x2 a{ 1, 2, 3, 4 }, b{ 0, 2, 1, 3 };
-	Matrix2x2 c = a * b;
+	//Matrix2x2 a{ 1, 2, 3, 4 }, b{ 0, 2, 1, 3 };
+	//Matrix2x2 c = a * b;
 
-	//cout << (int)(1 / deltaTime) << endl;
+	cout << (int)(1 / deltaTime) << endl;
 }
 
 void World::Update()
