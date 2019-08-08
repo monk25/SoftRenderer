@@ -35,6 +35,8 @@ Matrix4x4 & MatrixIdentity(Matrix4x4 & matrix)
 
 Matrix3x3 & MatrixTranslation(Matrix3x3 & matrix, const float & x, const float & y)
 {
+	MatrixIdentity(matrix);
+
 	matrix.m[2][0] = x;
 	matrix.m[2][1] = y;
 
@@ -43,6 +45,8 @@ Matrix3x3 & MatrixTranslation(Matrix3x3 & matrix, const float & x, const float &
 
 Matrix4x4 & MatrixTranslation(Matrix4x4 & matrix, const float & x, const float & y, const float & z)
 {
+	MatrixIdentity(matrix);
+
 	matrix.m[3][0] = x;
 	matrix.m[3][1] = y;
 	matrix.m[3][2] = z;
@@ -52,6 +56,8 @@ Matrix4x4 & MatrixTranslation(Matrix4x4 & matrix, const float & x, const float &
 
 Matrix3x3 & MatrixScale(Matrix3x3 & matrix, const float & x, const float & y)
 {
+	MatrixIdentity(matrix);
+
 	matrix.m[0][0] = x;
 	matrix.m[1][1] = y;
 
@@ -60,6 +66,8 @@ Matrix3x3 & MatrixScale(Matrix3x3 & matrix, const float & x, const float & y)
 
 Matrix4x4 & MatrixScale(Matrix4x4 & matrix, const float & x, const float & y, const float & z)
 {
+	MatrixIdentity(matrix);
+
 	matrix.m[0][0] = x;
 	matrix.m[1][1] = y;
 	matrix.m[2][2] = z;
@@ -69,6 +77,8 @@ Matrix4x4 & MatrixScale(Matrix4x4 & matrix, const float & x, const float & y, co
 
 Matrix3x3 & MatrixRotationDir(Matrix3x3 & matrix, const float & dir)
 {
+	MatrixIdentity(matrix);
+
 	matrix.m[0][0] = cosf(dir);
 	matrix.m[0][1] = sinf(dir);
 	matrix.m[1][0] = -sinf(dir);

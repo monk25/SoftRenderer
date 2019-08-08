@@ -7,8 +7,10 @@
 
 #include "Shape.h"
 
+#include "TestScene.h"
 
-World::World()
+
+World::World() : currentScene(nullptr)
 {
 }
 
@@ -25,6 +27,7 @@ void World::Initialize(int screenWidth, int screenHeight)
 	srand((unsigned)time(nullptr));
 	ZeroMemory(currentKeys, sizeof(currentKeys));
 	ZeroMemory(lastKeys, sizeof(lastKeys));
+	ChangeScene(new TestScene());
 	startClock = lastClock = currentClock = clock();
 }
 
@@ -34,18 +37,15 @@ void World::Dispose()
 	GDIHelper::GetInstance().ReleaseGDI(System::GetInstance().GetHwnd());
 }
 
+void World::ChangeScene(Scene * scene)
+{
+	SafeDelete(currentScene);
+	currentScene = scene;
+}
+
 void World::Render()
 {
-	//static Triangle t;
-	//t.Render(GetAsset().GetBMP("ikmyung2.bmp"));
-	
-	static Quad q;
-	q.Render(GetAsset().GetBMP("ikmyung2.bmp"));
-
-	//Matrix2x2 a{ 1, 2, 3, 4 }, b{ 0, 2, 1, 3 };
-	//Matrix2x2 c = a * b;
-
-	cout << (int)(1 / deltaTime) << endl;
+	currentScene->Render();
 }
 
 void World::Update()
@@ -61,6 +61,8 @@ void World::Update()
 
 	GetCursorPos(&mousePos);
 	ScreenToClient(System::GetInstance().GetHwnd(), &mousePos);
+
+	currentScene->Update();
 }
 
 int World::GetKeyState(int vk)

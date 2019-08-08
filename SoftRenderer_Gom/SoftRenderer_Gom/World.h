@@ -2,6 +2,8 @@
 #include "Define.h"
 #include "Singleton.h"
 
+class Scene;
+
 class World :
 	public Singleton<World>
 {
@@ -12,12 +14,17 @@ public:
 	void Initialize(int screenWidth, int screenHeight);
 	void Dispose();
 
+	void ChangeScene(Scene* scene);
+
 	void Render();
 	void Update();
 	int GetKeyState(int vk);
 	Vector2 GetMousePos();
 
 private:
+	Scene* currentScene;
+
+	//InputKey class
 	bool currentKeys[256];
 	bool lastKeys[256];
 	POINT mousePos;

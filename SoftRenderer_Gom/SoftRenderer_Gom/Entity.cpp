@@ -2,7 +2,14 @@
 #include "Entity.h"
 
 
-Entity::Entity()
+Entity::Entity() :
+	parent{ nullptr },
+	position{ 0.0f, 0.0f },
+	scale{ 1.0f, 1.0f },
+	rotation{ 0.0f },
+	matrix{},
+	visible{ true },
+	removing{ false }
 {
 }
 
@@ -31,10 +38,20 @@ void Entity::Update()
 
 void Entity::Render()
 {
-	static Matrix3x3 MatrixT, MatrixR, MatrixS;
+	static Matrix3x3 matrixT, matrixR, matrixS;
 	if (!visible) return;
 	
+	MatrixIdentity(matrix);
+	MatrixTranslation(matrixT, position.x, position.y);
+	MatrixRotationDir(matrixR, rotation);
+	MatrixScale(matrixS, scale.x, scale.y);
+	matrix = matrixS * matrixR * matrixT;
 
+	if (parent)
+		matrix *= parent->matrix;
+
+	for (auto* child : children)
+		child->Render();
 }
 
 void Entity::AddChild(Entity * child)
