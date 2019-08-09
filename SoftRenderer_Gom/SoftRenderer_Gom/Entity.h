@@ -20,8 +20,8 @@ public:
 	Vector2 scale;
 	float rotation;
 	Matrix3x3 matrix;
+	Rect rect;
 	bool visible;
 	bool removing;
-
 };
 

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Asset.h"
+#include "Texture.h"
 
 
 Asset::Asset()
@@ -17,12 +18,12 @@ void Asset::Initialize()
 
 void Asset::Dispose()
 {
-	for (auto& iter : BMPs) {
+	for (auto& iter : textures) {
 		delete iter.second;
 	}
 }
 
-Bitmap* Asset::OpenBMP(string filename)
+Texture* Asset::OpenBMP(Texture* texture, string filename)
 {
 	FILE* fp;
 	errno_t err;
@@ -74,19 +75,28 @@ Bitmap* Asset::OpenBMP(string filename)
 	{
 		delete[] pBmp;
 	}
-	return new Bitmap{ filename, bmpih.biWidth, bmpih.biHeight, pImageBuf };
+
+	texture->texture = pImageBuf;
+	texture->width = bmpih.biWidth;
+	texture->height = bmpih.biHeight;
+	texture->name = filename;
 }
 
-Bitmap * Asset::GetBMP(string filename)
+Texture * Asset::GetTexture(string filename)
 {
-	if (BMPs[filename]) {
-		return BMPs[filename];
+	if (!exists(filename)) {
+		cout << "파일 없음 : " << filename << endl;
 	}
 
-	BMPs[filename] = OpenBMP(filename);
-	if (BMPs[filename] == NULL) {
-		cout << "OpenBMP() Error. filename : " << filename << endl;
-		return nullptr;
+	if (!textures[filename]) {
+		textures[filename] = new Texture;
+		OpenBMP(textures[filename], filename);
+		textures[filename]->Initialize();
 	}
-	return BMPs[filename];
+
+	return textures[filename];
+}
+
+inline ULONG GetPixel(int x, int y, Texture* texure) {
+	return texure->texture[y * texure->width + x];
 }

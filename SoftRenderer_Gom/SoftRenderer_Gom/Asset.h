@@ -2,14 +2,7 @@
 #include "Define.h"
 #include "Singleton.h"
 
-struct Bitmap {
-	~Bitmap() {
-		delete[] data;
-	}
-	string name;
-	int width, height;
-	ULONG* data;
-};
+class Texture;
 
 class Asset :
 	public Singleton<Asset>
@@ -22,19 +15,14 @@ public:
 	void Initialize();
 	void Dispose();
 
-	Bitmap* GetBMP(string filename);
-	inline ULONG GetPixel(int x, int y, Bitmap* bmp) {
-		return bmp->data[y * bmp->width + x];
-	}
-	inline ULONG GetPixel(int x, int y, string filename) {
-		return GetPixel(x, y, GetBMP(filename));
-	}
+	Texture* GetTexture(string filename);
+	inline ULONG GetPixel(int x, int y, Texture* texure);
 
 private:
-	Bitmap* OpenBMP(string filename);
+	Texture* OpenBMP(Texture* texture, string filename);
 
 private:
-	map<string, Bitmap*> BMPs;
+	map<string, Texture*> textures;
 };
 
 inline Asset& GetAsset() {

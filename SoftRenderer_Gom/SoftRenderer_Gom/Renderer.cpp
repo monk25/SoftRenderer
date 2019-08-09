@@ -38,11 +38,17 @@ void DrawLine(const Vector3& p1, const Vector3& p2)
 	DrawLine(p1, dir, length);
 }
 
-void Renderer::Render(Vertex vertices[], int indices[], int iSize, void* data)
+void Renderer::Render(Matrix3x3 matrix, Texture* texture)
 {
-	this->data = data;
-	for (int i = 0; i < iSize; i += 3) {
-		DrawTriangle(vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]]);
+	resource = texture;
+	for (int i = 0; i < texture->verticesCount; i++) {
+		texture->vertices[i].pos *= matrix;
+	}
+	for (int i = 0; i < texture->indicesCount; i += 3) {
+		DrawTriangle(
+			texture->vertices[texture->indices[i]], 
+			texture->vertices[texture->indices[i + 1]], 
+			texture->vertices[texture->indices[i + 2]]);
 	}
 }
 
@@ -127,5 +133,5 @@ void BitmapRenderer::PutPixel(Vertex v)
 
 	ULONG* dest = (ULONG*)GetGDI().pBits;
 	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
-	*(dest + offset) = GetAsset().GetPixel(v.uv.x * ((Bitmap*)data)->width, v.uv.y * ((Bitmap*)data)->height, (Bitmap*)data);
+	*(dest + offset) = ((Texture*)resource)->GetPixel(v.pos.x, v.pos.y);
 }

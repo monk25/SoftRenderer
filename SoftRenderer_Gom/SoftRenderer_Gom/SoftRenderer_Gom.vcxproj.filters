@@ -37,6 +37,21 @@
     <Filter Include="Framework\Asset">
       <UniqueIdentifier>{8f6ff928-6b4f-4330-857e-f29b71078324}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Entity">
+      <UniqueIdentifier>{89df4f7f-4c00-4e3c-8586-b7a4ccca1ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Scene">
+      <UniqueIdentifier>{897deddf-1d6c-43c0-bf8b-41db63a45b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Camera">
+      <UniqueIdentifier>{db15006b-2106-46b8-a345-7b156654d6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sprite">
+      <UniqueIdentifier>{0ee5e8d4-6401-40f0-a38c-90d8c9d70d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Texture">
+      <UniqueIdentifier>{ac247e8e-9db2-4890-af84-63a4ce4c312c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -75,6 +90,24 @@
     <ClInclude Include="Matrix.h">
       <Filter>Framework\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Framework\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Framework\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -106,6 +139,24 @@
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Framework\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Framework\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Framework\Texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

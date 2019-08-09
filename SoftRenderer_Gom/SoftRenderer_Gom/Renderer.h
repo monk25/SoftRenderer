@@ -1,6 +1,7 @@
 #pragma once
 #include "Define.h"
 #include "Singleton.h"
+#include "Texture.h"
 
 inline bool IsInRange(int x, int y)
 {
@@ -10,19 +11,6 @@ void PutPixel(int x, int y);
 void PutPixel(int x, int y, const Vector3& color);
 void DrawLine(const Vector3& start, const Vector3& dir, const int& length);
 void DrawLine(const Vector3& p1, const Vector3& p2);
-
-struct Vertex {
-	Vertex() : pos(), color(), uv() {}
-	Vertex(Vector3 pos) : pos(pos) {}
-	Vertex(Vector3 pos, Vector3Int color) : pos(pos), color(color) {}
-	Vertex(Vector3 pos, Vector3Int color, Vector2 uv) : 
-		pos(pos), color(color), uv(uv) {}
-	~Vertex() {}
-
-	Vector3 pos;
-	Vector3Int color;
-	Vector2 uv;
-};
 
 class Renderer
 {
@@ -37,10 +25,10 @@ private:
 	void DrawTriangle(Vertex v1, Vertex v2, Vertex v3);
 
 public:
-	void Render(Vertex vertices[], int indices[], int iSize, void* data = nullptr);
+	void Render(Matrix3x3 matrix, Texture* texture);
 
 protected:
-	void* data;
+	void* resource;
 };
 
 class ColorRenderer :

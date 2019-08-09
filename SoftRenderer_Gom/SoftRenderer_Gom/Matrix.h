@@ -1,23 +1,6 @@
 #pragma once
 #include "Define.h"
 
-class Matrix2x2;
-class Matrix3x3;
-class Matrix4x4;
-
-Matrix2x2& MatrixIdentity(Matrix2x2& matrix);
-Matrix3x3& MatrixIdentity(Matrix3x3& matrix);
-Matrix4x4& MatrixIdentity(Matrix4x4& matrix);
-
-Matrix3x3& MatrixTranslation(Matrix3x3& matrix, const float& x, const float& y);
-Matrix4x4& MatrixTranslation(Matrix4x4& matrix, const float& x, const float& y, const float& z);
-
-Matrix3x3& MatrixScale(Matrix3x3& matrix, const float& x, const float& y);
-Matrix4x4& MatrixScale(Matrix4x4& matrix, const float& x, const float& y, const float& z);
-
-Matrix3x3& MatrixRotationDir(Matrix3x3& matrix, const float& dir);
-Matrix4x4& MatrixRotationYawPitchRoll(Matrix4x4& matrix, const float& yaw, const float& pitch, const float roll);
-
 struct Matrix2x2
 {
 	Matrix2x2() : m{ 0.0f, } {}
@@ -248,3 +231,16 @@ public:
 		float m[4][4];
 	};
 };
+
+Matrix2x2& MatrixIdentity(Matrix2x2& matrix);
+Matrix3x3& MatrixIdentity(Matrix3x3& matrix);
+Matrix4x4& MatrixIdentity(Matrix4x4& matrix);
+
+Matrix3x3& MatrixTranslation(Matrix3x3& matrix, const float& x, const float& y);
+Matrix4x4& MatrixTranslation(Matrix4x4& matrix, const float& x, const float& y, const float& z);
+
+Matrix3x3& MatrixScale(Matrix3x3& matrix, const float& x, const float& y);
+Matrix4x4& MatrixScale(Matrix4x4& matrix, const float& x, const float& y, const float& z);
+
+Matrix3x3& MatrixRotationDir(Matrix3x3& matrix, const float& dir);
+Matrix4x4& MatrixRotationYawPitchRoll(Matrix4x4& matrix, const float& yaw, const float& pitch, const float roll);
