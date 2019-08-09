@@ -2,16 +2,16 @@
 #include "Define.h"
 
 struct Vertex {
-	Vertex() : pos(), color(), uv() {}
+	Vertex() : pos(), color(), normal() {}
 	Vertex(Vector3 pos) : pos(pos) {}
 	Vertex(Vector3 pos, Vector3Int color) : pos(pos), color(color) {}
-	Vertex(Vector3 pos, Vector3Int color, Vector2 uv) :
-		pos(pos), color(color), uv(uv) {}
+	Vertex(Vector3 pos, Vector3Int color, Vector2 normal) :
+		pos(pos), color(color), normal(normal) {}
 	~Vertex() {}
 
 	Vector3 pos;
 	Vector3Int color;
-	Vector2 uv;
+	Vector2 normal;
 };
 
 class Texture
@@ -23,6 +23,9 @@ public:
 	void Initialize();
 	inline const ULONG& GetPixel(int x, int y) {
 		return texture[y * width + x];
+	}
+	inline const ULONG& GetPixelUV(const float& u, const float& v) {
+		return texture[static_cast<int>(v * height) * width + static_cast<int>(u * width)];
 	}
 
 public:

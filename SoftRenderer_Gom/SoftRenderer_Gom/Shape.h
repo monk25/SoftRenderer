@@ -15,7 +15,7 @@ public:
 public:
 	void SetRenderer(Renderer* renderer);
 	virtual void Render(void* data = nullptr) {
-		shaderRenderer->Render(vertices, indices, indicesSize, data);
+		//shaderRenderer->Render(vertices, indices, indicesSize, data);
 	}
 
 protected:

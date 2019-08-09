@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 
 struct Matrix2x2
 {
@@ -109,6 +108,7 @@ struct Matrix3x3
 	}
 	Matrix3x3& operator*=(const Matrix3x3& rhs) {
 		*this = *this * rhs;
+		return *this;
 	}
 	const Matrix3x3 operator+(const Matrix3x3& rhs) const {
 		return Matrix3x3{

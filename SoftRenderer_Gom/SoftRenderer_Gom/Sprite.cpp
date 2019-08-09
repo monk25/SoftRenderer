@@ -3,11 +3,11 @@
 #include "Asset.h"
 
 
-Sprite::Sprite() : texture(nullptr)
+Sprite::Sprite() : texture(nullptr), shader(&BitmapRenderer::GetInstance())
 {
 }
 
-Sprite::Sprite(const string & path) : texture(nullptr)
+Sprite::Sprite(const string & path) : texture(nullptr), shader(&BitmapRenderer::GetInstance())
 {
 	SetPath(path);
 }
@@ -31,5 +31,5 @@ void Sprite::Render()
 
 	Entity::Render();
 
-	//shader->Render();
+	shader->Render(matrix, texture);
 }

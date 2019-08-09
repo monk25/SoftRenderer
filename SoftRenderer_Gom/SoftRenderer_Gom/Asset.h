@@ -16,7 +16,6 @@ public:
 	void Dispose();
 
 	Texture* GetTexture(string filename);
-	inline ULONG GetPixel(int x, int y, Texture* texure);
 
 private:
 	Texture* OpenBMP(Texture* texture, string filename);

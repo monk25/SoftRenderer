@@ -33,6 +33,11 @@ private:
 	clock_t startClock;
 	clock_t currentClock;
 	clock_t lastClock;
+
+public:
 	double deltaTime;
 };
 
+inline World& GetWorld() {
+	return World::GetInstance();
+}

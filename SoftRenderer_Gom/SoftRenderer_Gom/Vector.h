@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 #include "Matrix.h"
 
 class Vector2;
@@ -70,10 +69,10 @@ struct Vector2
 		return Vector2{ this->x * rhs, this->y * rhs };
 	}
 	const Vector2 operator*(const Matrix2x2& rhs) const {
-		float t[2];
+		float t[2]{ 0.0f };
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
-				t[i] += (*this)[j] * rhs.m[i][j];
+				t[i] += (*this)[j] * rhs.m[j][i];
 			}
 		}
 		return t;
@@ -96,7 +95,7 @@ struct Vector2Int
 {
 	Vector2Int() : x{ 0 }, y{ 0 } {}
 	Vector2Int(const int& x, const int& y) : x{ x }, y{ y } {}
-	Vector2Int(const float& x, const float& y) : x{ x }, y{ y } {}
+	Vector2Int(const float& x, const float& y) : x{ static_cast<int>(x) }, y{ static_cast<int>(y) } {}
 	Vector2Int(const Vector2Int& other) : x{ other.x }, y{ other.y } {}
 	Vector2Int(const Vector2& other);
 	Vector2Int(const Vector3& other);
@@ -229,10 +228,10 @@ struct Vector3
 		return Vector3{ this->x * rhs, this->y * rhs, this->z * rhs };
 	}
 	const Vector3 operator*(const Matrix3x3& rhs) const {
-		float t[3];
+		float t[3]{ 0.0f };
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				t[i] += (*this)[j] * rhs.m[i][j];
+				t[i] += (*this)[j] * rhs.m[j][i];
 			}
 		}
 		return t;
@@ -256,8 +255,8 @@ struct Vector3Int
 	Vector3Int() : x{ 0 }, y{ 0 }, z{ 0 } {}
 	Vector3Int(const int& x, const int& y) : x{ x }, y{ y }, z{ 0 } {}
 	Vector3Int(const int& x, const int& y, const int& z) : x{ x }, y{ y }, z{ z } {}
-	Vector3Int(const float& x, const float& y) : x{ x }, y{ y }, z{ 0 } {}
-	Vector3Int(const float& x, const float& y, const float& z) : x{ x }, y{ y }, z{ z } {}
+	Vector3Int(const float& x, const float& y) : x{ static_cast<int>(x) }, y{ static_cast<int>(y) }, z{ 0 } {}
+	Vector3Int(const float& x, const float& y, const float& z) : x{ static_cast<int>(x) }, y{ static_cast<int>(y) }, z{ static_cast<int>(z) } {}
 	Vector3Int(const Vector3Int& other) : x{ other.x }, y{ other.y }, z{ other.z } {}
 	Vector3Int(const Vector2& other);
 	Vector3Int(const Vector2Int& other);
@@ -396,10 +395,10 @@ struct Vector4
 		return Vector4{ this->x * rhs, this->y * rhs, this->z * rhs };
 	}
 	const Vector4 operator*(const Matrix4x4& rhs) const {
-		float t[4];
+		float t[4]{ 0.0f };
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				t[i] = (*this)[j] * rhs.m[i][j];
+				t[i] = (*this)[j] * rhs.m[j][i];
 			}
 		}
 		return t;

@@ -41,15 +41,21 @@ void DrawLine(const Vector3& p1, const Vector3& p2)
 void Renderer::Render(Matrix3x3 matrix, Texture* texture)
 {
 	resource = texture;
+	
+	Vertex* vertices = new Vertex[texture->verticesCount];
 	for (int i = 0; i < texture->verticesCount; i++) {
-		texture->vertices[i].pos *= matrix;
+		vertices[i].pos = texture->vertices[i].pos * matrix;
+		vertices[i].color = texture->vertices[i].color;
+		vertices[i].normal = texture->vertices[i].normal;
 	}
 	for (int i = 0; i < texture->indicesCount; i += 3) {
 		DrawTriangle(
-			texture->vertices[texture->indices[i]], 
-			texture->vertices[texture->indices[i + 1]], 
-			texture->vertices[texture->indices[i + 2]]);
+			vertices[texture->indices[i]], 
+			vertices[texture->indices[i + 1]], 
+			vertices[texture->indices[i + 2]]);
 	}
+
+	delete[] vertices;
 }
 
 void Renderer::DrawTriangle(Vertex v1, Vertex v2, Vertex v3)
@@ -96,7 +102,7 @@ void Renderer::DrawTriangle(Vertex v1, Vertex v2, Vertex v3)
 			float t = (Dot(w, v) * Dot(u, u) - Dot(w, u) * Dot(u, v)) * div;
 			Vertex pixel{ Vector2Int(j, start.y), 
 				(1 - s - t) * v1.color + s * v2.color + t * v3.color, 
-				(1 - s - t) * v1.uv + s * v2.uv + t * v3.uv };
+				(1 - s - t) * v1.normal + s * v2.normal + t * v3.normal };
 			PutPixel(pixel);
 		}
 	}
@@ -112,7 +118,7 @@ void Renderer::DrawTriangle(Vertex v1, Vertex v2, Vertex v3)
 			float t = (Dot(w, v) * Dot(u, u) - Dot(w, u) * Dot(u, v)) * div;
 			Vertex pixel{ Vector2Int(j, start.y), 
 				(1 - s - t) * v1.color + s * v2.color + t * v3.color,
-				(1 - s - t) * v1.uv + s * v2.uv + t * v3.uv };
+				(1 - s - t) * v1.normal + s * v2.normal + t * v3.normal };
 			PutPixel(pixel);
 		}
 	}
@@ -123,7 +129,7 @@ void ColorRenderer::PutPixel(Vertex v)
 	if (!IsInRange(v.pos.x, v.pos.y)) return;
 
 	ULONG* dest = (ULONG*)GetGDI().pBits;
-	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
+	DWORD offset = ScreenWidth * ScreenHeight * 0.5f + ScreenWidth * 0.5f + v.pos.x + ScreenWidth * v.pos.y;
 	*(dest + offset) = RGB(v.color.z, v.color.y, v.color.x);
 }
 
@@ -132,6 +138,6 @@ void BitmapRenderer::PutPixel(Vertex v)
 	if (!IsInRange(v.pos.x, v.pos.y)) return;
 
 	ULONG* dest = (ULONG*)GetGDI().pBits;
-	DWORD offset = ScreenWidth * ScreenHeight / 2 + ScreenWidth / 2 + v.pos.x + ScreenWidth * -v.pos.y;
-	*(dest + offset) = ((Texture*)resource)->GetPixel(v.pos.x, v.pos.y);
+	DWORD offset = ScreenWidth * ScreenHeight * 0.5f + ScreenWidth * 0.5f + v.pos.x + ScreenWidth * v.pos.y;
+	*(dest + offset) = ((Texture*)resource)->GetPixelUV(Clamp(v.normal.x, 0.0f, 1.0f), Clamp(v.normal.y, 0.0f, 1.0f));
 }
