@@ -52,6 +52,9 @@
     <Filter Include="Framework\Texture">
       <UniqueIdentifier>{ac247e8e-9db2-4890-af84-63a4ce4c312c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Time">
+      <UniqueIdentifier>{ba845764-c486-4713-9505-ee7e17b48707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -108,6 +111,7 @@
     <ClInclude Include="Texture.h">
       <Filter>Framework\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -158,5 +162,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Framework\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
 </Project>

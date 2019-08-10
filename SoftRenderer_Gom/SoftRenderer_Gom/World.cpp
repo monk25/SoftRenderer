@@ -4,8 +4,7 @@
 #include "GDIHelper.h"
 #include "Asset.h"
 #include "Renderer.h"
-
-#include "Shape.h"
+#include "Time.h"
 
 #include "TestScene.h"
 
@@ -24,15 +23,16 @@ void World::Initialize(int screenWidth, int screenHeight)
 	System::GetInstance().InitializeWindows();
 	GDIHelper::GetInstance().InitGDI(System::GetInstance().GetHwnd());
 	Asset::GetInstance().Initialize();
+	Time::GetInstance().Initialize();
 	srand((unsigned)time(nullptr));
 	ZeroMemory(currentKeys, sizeof(currentKeys));
 	ZeroMemory(lastKeys, sizeof(lastKeys));
 	ChangeScene(new TestScene());
-	startClock = lastClock = currentClock = clock();
 }
 
 void World::Dispose()
 {
+	SafeDelete(currentScene);
 	Asset::GetInstance().Dispose();
 	GDIHelper::GetInstance().ReleaseGDI(System::GetInstance().GetHwnd());
 }
@@ -50,9 +50,7 @@ void World::Render()
 
 void World::Update()
 {
-	lastClock = currentClock;
-	currentClock = clock();
-	deltaTime = (double)(currentClock - lastClock) / CLOCKS_PER_SEC;
+	Time::GetInstance().Update();
 
 	for (int i = 0; i < 256; i++) {
 		lastKeys[i] = currentKeys[i];

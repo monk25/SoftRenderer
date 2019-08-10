@@ -112,14 +112,14 @@ struct Matrix3x3
 	}
 	const Matrix3x3 operator+(const Matrix3x3& rhs) const {
 		return Matrix3x3{
-			_11 + rhs._11, _12 + rhs._12, _12 + rhs._13,
+			_11 + rhs._11, _12 + rhs._12, _13 + rhs._13,
 			_21 + rhs._21, _22 + rhs._22, _23 + rhs._23,
 			_31 + rhs._31, _32 + rhs._32, _33 + rhs._33
 		};
 	}
 	const Matrix3x3 operator-(const Matrix3x3& rhs) const {
 		return Matrix3x3{
-			_11 - rhs._11, _12 - rhs._12, _12 - rhs._13,
+			_11 - rhs._11, _12 - rhs._12, _13 - rhs._13,
 			_21 - rhs._21, _22 - rhs._22, _23 - rhs._23,
 			_31 - rhs._31, _32 - rhs._32, _33 - rhs._33
 		};
@@ -193,7 +193,7 @@ struct Matrix4x4
 	}
 	const Matrix4x4 operator+(const Matrix4x4& rhs) const {
 		return Matrix4x4{
-			_11 + rhs._11, _12 + rhs._12, _12 + rhs._13, _14 + rhs._14,
+			_11 + rhs._11, _12 + rhs._12, _13 + rhs._13, _14 + rhs._14,
 			_21 + rhs._21, _22 + rhs._22, _23 + rhs._23, _24 + rhs._24,
 			_31 + rhs._31, _32 + rhs._32, _33 + rhs._33, _34 + rhs._34,
 			_41 + rhs._41, _42 + rhs._32, _43 + rhs._43, _44 + rhs._44
@@ -201,7 +201,7 @@ struct Matrix4x4
 	}
 	const Matrix4x4 operator-(const Matrix4x4& rhs) const {
 		return Matrix4x4{
-			_11 - rhs._11, _12 - rhs._12, _12 - rhs._13, _14 - rhs._14,
+			_11 - rhs._11, _12 - rhs._12, _13 - rhs._13, _14 - rhs._14,
 			_21 - rhs._21, _22 - rhs._22, _23 - rhs._23, _24 - rhs._24,
 			_31 - rhs._31, _32 - rhs._32, _33 - rhs._33, _34 - rhs._34,
 			_41 - rhs._41, _42 - rhs._32, _43 - rhs._43, _44 - rhs._44

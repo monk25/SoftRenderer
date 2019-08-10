@@ -10,8 +10,8 @@ Texture::Texture()
 Texture::~Texture()
 {
 	SafeDelete(texture);
-	SafeDelete(vertices);
-	SafeDelete(indices);
+	SafeDeleteArr(vertices);
+	SafeDeleteArr(indices);
 }
 
 void Texture::Initialize()

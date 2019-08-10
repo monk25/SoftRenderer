@@ -21,14 +21,16 @@ const float SMALL_NUMBER{ 1.e-8f };
 const float KINDA_SMALL_NUMBER{ 1.e-4f };
 const float BIG_NUMBER{ 3.4e+38f };
 
-inline void SafeDelete(void* data) {
+template <typename T>
+inline void SafeDelete(T* data) {
 	if (data)
 		delete data;
 }
 
-inline void SafeRelease(void* data) {
+template <typename T>
+inline void SafeDeleteArr(T* data) {
 	if (data)
-		delete data;
+		delete[] data;
 }
 
 struct Rect : public RECT

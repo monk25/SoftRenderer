@@ -24,6 +24,8 @@ protected:
 private:
 	void DrawTriangle(Vertex v1, Vertex v2, Vertex v3);
 
+	void DrawFlatSideTriangle(Vertex v1, Vertex v2, Vertex v3);
+
 public:
 	void Render(Matrix3x3 matrix, Texture* texture);
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "Define.h"
 #include "Singleton.h"
+#include "Scene.h"
 
-class Scene;
 
 class World :
 	public Singleton<World>
@@ -21,21 +21,12 @@ public:
 	int GetKeyState(int vk);
 	Vector2 GetMousePos();
 
-private:
 	Scene* currentScene;
-
+private:
 	//InputKey class
 	bool currentKeys[256];
 	bool lastKeys[256];
 	POINT mousePos;
-
-	//Time class
-	clock_t startClock;
-	clock_t currentClock;
-	clock_t lastClock;
-
-public:
-	double deltaTime;
 };
 
 inline World& GetWorld() {

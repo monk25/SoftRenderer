@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Sprite.h"
 #include "Asset.h"
+#include "World.h"
 
 
 Sprite::Sprite() : texture(nullptr), shader(&BitmapRenderer::GetInstance())
@@ -31,5 +32,5 @@ void Sprite::Render()
 
 	Entity::Render();
 
-	shader->Render(matrix, texture);
+	shader->Render(matrix * GetWorld().currentScene->mainCamera->matrix, texture);
 }
