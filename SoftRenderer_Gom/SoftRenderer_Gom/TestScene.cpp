@@ -79,7 +79,6 @@ void TestScene::Update()
 	if (GetWorld().GetKeyState('F') > 0) {
 		mainCamera->scale -= 0.5f * Vector2{ 1.0f, 1.0f } * GetTime().deltaTime;
 	}
-	cout << static_cast<int>(1 / GetTime().deltaTime) << " " << GetTime().deltaTime << endl;
 }
 
 void TestScene::Render()

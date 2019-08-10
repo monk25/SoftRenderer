@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Time.h"
+#include "System.h"
 
 
 Time::Time()
@@ -26,4 +27,16 @@ void Time::Update()
 	lastTime = currentTime;
 	QueryPerformanceCounter(&currentTime);
 	deltaTime = static_cast<double>(currentTime.QuadPart - lastTime.QuadPart) * freq;
+
+	static double time = 0;
+	static int frame = 0;
+	time += GetTime().deltaTime;
+	frame++;
+	if (time >= 1.0f) {
+		wstringstream ws;
+		ws << "FPS " << frame << "   (ms) " << time / frame * 1000.0f;
+		SetWindowTextW(System::GetInstance().GetHwnd(), ws.str().c_str());
+		time = 0.0f;
+		frame = 0;
+	}
 }

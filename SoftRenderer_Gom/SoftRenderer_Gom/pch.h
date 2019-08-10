@@ -16,6 +16,7 @@
 
 // C++ 런타임 헤더 파일
 #include <iostream>
+#include <sstream>
 #include <list>
 #include <vector>
 #include <map>
