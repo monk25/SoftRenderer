@@ -55,6 +55,15 @@
     <Filter Include="Framework\Time">
       <UniqueIdentifier>{ba845764-c486-4713-9505-ee7e17b48707}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Animation">
+      <UniqueIdentifier>{1a3d6d21-3b09-421d-a778-58e145bb1120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Utility\loadpng">
+      <UniqueIdentifier>{c1376b21-283b-43ad-aae0-be44e1f6660c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Character">
+      <UniqueIdentifier>{9b3d50d6-5acb-472f-ac8c-09997b09b042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -105,13 +114,27 @@
     <ClInclude Include="TestScene.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Framework\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Framework\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Framework\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="lodepng.h">
+      <Filter>Framework\Utility\loadpng</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterState.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -162,6 +185,20 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Framework\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Framework\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Framework\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="lodepng.cpp">
+      <Filter>Framework\Utility\loadpng</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterState.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

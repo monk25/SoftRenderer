@@ -3,12 +3,17 @@
 #include "Sprite.h"
 #include "World.h"
 #include "Time.h"
+#include "Character.h"
 
 TestScene::TestScene()
 {
 	spr = new Sprite("ikmyung2.bmp");
 	spr->scale *= 0.2f;
 	AddChild(spr);
+
+	Character* cha = new Character();
+	cha->scale *= 0.2f;
+	AddChild(cha);
 }
 
 
@@ -23,7 +28,7 @@ void TestScene::Update()
 	if (GetWorld().GetKeyState(VK_SPACE) == 1) {
 		spr->position = Vector3{};
 		spr->rotation = 0.0f;
-		spr->scale = Vector2{ 1.0f, 1.0f };
+		spr->scale = Vector2{ 0.2f, 0.2f };
 
 		mainCamera->position = Vector3{};
 		mainCamera->rotation = 0.0f;
@@ -48,7 +53,7 @@ void TestScene::Update()
 	if (GetWorld().GetKeyState('M') > 0) {
 		spr->rotation += 10.0f * GetTime().deltaTime;
 	}
-	if (GetWorld().GetKeyState('J') > 0) {
+	if (GetWorld().GetKeyState('L') > 0) {
 		spr->scale -= 0.5f * Vector2{ 1.0f, 1.0f } * GetTime().deltaTime;
 	}
 	if (GetWorld().GetKeyState('K') > 0) {
