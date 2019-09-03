@@ -3,7 +3,7 @@
 #include "Singleton.h"
 #include "Texture.h"
 
-inline bool IsInRange(int x, int y)
+inline bool IsInRange(const int& x, const int& y)
 {
 	return (Abs(x) < (ScreenWidth / 2)) && (Abs(y) < (ScreenHeight / 2));
 }
@@ -19,7 +19,7 @@ public:
 	virtual ~Renderer() {}
 
 protected:
-	virtual void PutPixel(Vertex v) = 0;
+	virtual void PutPixel(const Vertex& v) = 0;
 
 private:
 	void DrawTriangle(Vertex v1, Vertex v2, Vertex v3);
@@ -41,7 +41,7 @@ public:
 	virtual ~ColorRenderer() {}
 
 protected:
-	virtual void PutPixel(Vertex v) override;
+	virtual void PutPixel(const Vertex& v) override;
 };
 
 class BitmapRenderer :
@@ -52,5 +52,5 @@ public:
 	virtual ~BitmapRenderer() {}
 
 protected:
-	virtual void PutPixel(Vertex v) override;
+	virtual void PutPixel(const Vertex& v) override;
 };

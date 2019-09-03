@@ -25,11 +25,14 @@ public:
 		return texture[y * width + x];
 	}
 	inline const ULONG& GetPixelUV(const float& u, const float& v) {
-		return texture[static_cast<int>(v * height) * width + static_cast<int>(u * width)];
+		int uv = static_cast<int>(v * height) * width + static_cast<int>(u * width);
+		uv *= 4;
+		return png[uv + 2] | png[uv + 1] << 8 | png[uv + 0] << 16 | png[uv + 3] << 24;
 	}
 
 public:
 	ULONG* texture;
+	unsigned char* png;
 	int width;
 	int height;
 	string name;

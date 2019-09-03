@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Asset.h"
 #include "Texture.h"
+#include "lodepng.h"
 
 
 Asset::Asset()
@@ -80,17 +81,41 @@ Texture* Asset::OpenBMP(Texture* texture, string filename)
 	texture->width = bmpih.biWidth;
 	texture->height = bmpih.biHeight;
 	texture->name = filename;
+	return texture;
+}
+
+Texture * Asset::OpenPng(Texture * texture, string filename)
+{
+	//texture->png = new unsigned char[1024];
+	lodepng_decode32_file(&texture->png, 
+		(unsigned int*)(&texture->width), 
+		(unsigned int*)(&texture->height), 
+		filename.c_str());
+	texture->name = filename;
+
+	return texture;
 }
 
 Texture * Asset::GetTexture(string filename)
 {
+	filename = "../Resource/" + filename;
 	if (!exists(filename)) {
 		cout << "파일 없음 : " << filename << endl;
 	}
 
 	if (!textures[filename]) {
 		textures[filename] = new Texture;
-		OpenBMP(textures[filename], filename);
+		string extension = filename.substr(filename.find_last_of('.') + 1);
+		if (extension == "bmp") {
+			OpenBMP(textures[filename], filename);
+		}
+		else if (extension == "png") {
+			OpenPng(textures[filename], filename);
+		}
+		else {
+			cout << extension << " 에 맞는 load 형식 없음" << endl;
+		}
+
 		textures[filename]->Initialize();
 	}
 

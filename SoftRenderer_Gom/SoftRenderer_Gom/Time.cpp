@@ -28,7 +28,7 @@ void Time::Update()
 	QueryPerformanceCounter(&currentTime);
 	deltaTime = static_cast<double>(currentTime.QuadPart - lastTime.QuadPart) * freq;
 
-	static double time = 0;
+	static double time = 1.0;
 	static int frame = 0;
 	time += GetTime().deltaTime;
 	frame++;

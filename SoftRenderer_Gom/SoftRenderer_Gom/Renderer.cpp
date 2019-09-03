@@ -288,20 +288,23 @@ void Renderer::DrawFlatSideTriangle(Vertex v1, Vertex v2, Vertex v3)
 	}
 }
 
-void ColorRenderer::PutPixel(Vertex v)
+void ColorRenderer::PutPixel(const Vertex& v)
 {
 	if (!IsInRange(v.pos.x, v.pos.y)) return;
 
-	ULONG* dest = (ULONG*)GetGDI().pBits;
-	DWORD offset = ScreenWidth * ScreenHeight * 0.5f + ScreenWidth * 0.5f + v.pos.x + ScreenWidth * v.pos.y;
-	*(dest + offset) = RGB(v.color.z, v.color.y, v.color.x);
+	static ULONG* dest = (ULONG*)GetGDI().pBits;
+	DWORD offset = ScreenOffset + v.pos.x + ScreenWidth * v.pos.y;
+	*(dest + offset) = RGB(Clamp(v.color.z, 0, 255), Clamp(v.color.y, 0, 255), Clamp(v.color.x, 0, 255));
 }
 
-void BitmapRenderer::PutPixel(Vertex v)
+void BitmapRenderer::PutPixel(const Vertex& v)
 {
 	if (!IsInRange(v.pos.x, v.pos.y)) return;
 
-	ULONG* dest = (ULONG*)GetGDI().pBits;
-	DWORD offset = ScreenWidth * ScreenHeight * 0.5f + ScreenWidth * 0.5f + v.pos.x + ScreenWidth * v.pos.y;
-	*(dest + offset) = ((Texture*)resource)->GetPixelUV(Clamp(v.normal.x, 0.0f, 1.0f), Clamp(v.normal.y, 0.0f, 1.0f));
+	static ULONG* dest = (ULONG*)GetGDI().pBits;
+	DWORD offset = ScreenOffset + v.pos.x + ScreenWidth * v.pos.y;
+	DWORD target = *(dest + offset);
+	DWORD source = ((Texture*)resource)->GetPixelUV(Clamp(v.normal.x, 0.0f, 1.0f), Clamp(v.normal.y, 0.0f, 1.0f));
+	double sourceAlpha = (source >> 24) * 0.003921568627451;
+	*(dest + offset) = source * sourceAlpha + target * (1 - sourceAlpha);
 }

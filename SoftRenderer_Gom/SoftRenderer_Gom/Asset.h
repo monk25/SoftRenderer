@@ -19,6 +19,7 @@ public:
 
 private:
 	Texture* OpenBMP(Texture* texture, string filename);
+	Texture* OpenPng(Texture* texture, string filename);
 
 private:
 	map<string, Texture*> textures;

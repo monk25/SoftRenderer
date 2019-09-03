@@ -18,6 +18,9 @@ Character::Character()
 
 Character::~Character()
 {
+	for (auto state : states) {
+		delete state.second;
+	}
 }
 
 void Character::Update()

@@ -12,19 +12,19 @@ inline void Swap(T &a, T &b)
 }
 
 template<typename T>
-inline const T& const Max(const T &a, const T &b)
+inline const T& Max(const T &a, const T &b)
 {
 	return (a > b) ? a : b;
 }
 
 template<typename T>
-inline const T& const Min(const T &a, const T &b)
+inline const T& Min(const T &a, const T &b)
 {
 	return (a < b) ? a : b;
 }
 
 template<typename T>
-inline const T const Abs(const T &t)
+inline const T Abs(const T &t)
 {
 	return (t > 0) ? t : t * -1;
 }

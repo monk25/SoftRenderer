@@ -9,12 +9,13 @@
 using namespace std;
 using namespace std::experimental::filesystem::v1;
 
-const int ScreenWidth{ 1280 };
-const int ScreenHeight{ 720 };
+const int ScreenWidth{ 800 };
+const int ScreenHeight{ 600 };
 const bool FullScreen{ false };
 const bool VsyncEnable{ true };
 const float ScreenDepth{ 1000.0f };
 const float ScreenNear{ 0.1f };
+const float ScreenOffset{ ScreenWidth * ScreenHeight * 0.5f + ScreenWidth * 0.5f };
 
 const float PI{ 3.1415926535897932f };
 const float SMALL_NUMBER{ 1.e-8f };

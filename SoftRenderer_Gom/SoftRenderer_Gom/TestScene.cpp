@@ -5,14 +5,17 @@
 #include "Time.h"
 #include "Character.h"
 
+#include "GDIHelper.h"
+
 TestScene::TestScene()
 {
-	spr = new Sprite("ikmyung2.bmp");
+	spr = new Sprite("ch_idle.png");
 	spr->scale *= 0.2f;
 	AddChild(spr);
 
 	Character* cha = new Character();
 	cha->scale *= 0.2f;
+	cha->visible = false;
 	AddChild(cha);
 }
 
